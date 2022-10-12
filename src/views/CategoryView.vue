@@ -31,7 +31,8 @@ function getPageProducts(routeTo, next) {
   const currentPage = parseInt(routeTo.query.page) || 1
   store.dispatch('getCat')
   store
-    .dispatch('fetchProducts', {
+    .dispatch('fetchByCategory', {
+      category: store.state.categ,
       page: currentPage,
     })
     .then(() => {
@@ -41,7 +42,9 @@ function getPageProducts(routeTo, next) {
 }
 
 export default {
-  name: 'HomeView',
+  props: {
+    category: String,
+  },
   data() {
     return {
       currentPage: this.$route.query.page || 1,
@@ -58,7 +61,7 @@ export default {
   watch: {
     currentPage(newValue, oldValue) {
       if (newValue !== oldValue) {
-        this.$router.push({ name: 'home', query: { page: newValue } })
+        this.$router.push({ name: 'category', query: { page: newValue } })
       }
     },
   },
