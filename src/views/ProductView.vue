@@ -41,12 +41,32 @@
       </div>
       <h4 class="paddingStyle">Price: ${{ product.price }}</h4>
       <h6 class="paddingStyle">Shipping: ${{ shipping }}</h6>
-      <div class="d-flex mt-4">
-        <div class="btnClass">
-          <BaseButton class="mr-3" buttonClass="-fill-gray">Buy Now</BaseButton>
+      <div class="d-flex mt-4 flex-column">
+        <div class="btn-group mb-3" role="group" aria-label="Basic example">
+          <BaseButton
+            buttonClass="-fill-gray"
+            @click="removeFromCart(product)"
+            style="width: 3rem"
+          >
+            -
+          </BaseButton>
+          <input
+            type="text"
+            class="rounded px-2 mx-1"
+            v-model="cartProductLength"
+            style="width: 3rem; text-align: center"
+            readonly
+          />
+          <BaseButton
+            buttonClass="-fill-gray"
+            @click="addToCart(product)"
+            style="width: 3rem"
+          >
+            +
+          </BaseButton>
         </div>
         <div class="btnClass">
-          <BaseButton buttonClass="-fill-gray">Add to Cart</BaseButton>
+          <BaseButton buttonClass="-fill-gray">Buy Now</BaseButton>
         </div>
       </div>
     </div>
@@ -54,13 +74,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
+  data() {
+    return {
+      cartProductLength: 1,
+    }
+  },
   computed: {
     shipping() {
       return this.product.price >= 30 ? 0 : 5
     },
-    ...mapState(['product']),
+    ...mapState(['product', 'cart']),
+  },
+  methods: {
+    ...mapActions(['addToCart', 'removeFromCart']),
   },
 }
 </script>

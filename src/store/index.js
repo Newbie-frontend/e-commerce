@@ -16,6 +16,7 @@ export default new Vuex.Store({
     totalProducts: null,
     categ: null,
     favorites: [],
+    cart: [],
   },
   getters: {},
   mutations: {
@@ -42,6 +43,12 @@ export default new Vuex.Store({
     },
     REMOVE_FAVORITE(state, index) {
       state.favorites.splice(index, 1)
+    },
+    ADD_CART(state, product) {
+      state.cart.push(product)
+    },
+    REMOVE_CART(state, index) {
+      state.cart.splice(index, 1)
     },
   },
   actions: {
@@ -81,6 +88,15 @@ export default new Vuex.Store({
       !isFavorite
         ? commit('ADD_FAVORITE', product)
         : commit('REMOVE_FAVORITE', favoriteIndex)
+    },
+    addToCart({ commit }, product) {
+      commit('ADD_CART', product)
+    },
+    removeFromCart({ commit, state }, product) {
+      const cartItem = state.cart.findIndex((x) => x == product)
+      if (cartItem != undefined) {
+        commit('REMOVE_CART', cartItem)
+      }
     },
   },
   modules: {},

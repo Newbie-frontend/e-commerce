@@ -18,9 +18,11 @@
               <b-nav-item href="#" class="mr-2"
                 ><b-icon icon="suit-heart"></b-icon> Favorite</b-nav-item
               >
-              <b-nav-item href="#"
-                ><b-icon icon="cart"></b-icon> Cart</b-nav-item
-              >
+              <b-nav-item :to="{ name: 'cart' }">
+                <b-icon icon="cart"></b-icon>
+                Cart
+                <b-badge variant="secondary">{{ cartLength }}</b-badge>
+              </b-nav-item>
             </b-navbar-nav>
           </b-navbar-nav>
         </b-collapse>
@@ -67,7 +69,10 @@ export default {
         ? Object.entries(this.signedStatusItems)[0]
         : Object.entries(this.signedStatusItems)[1]
     },
-    ...mapState(['categories']),
+    cartLength() {
+      return this.cart.length
+    },
+    ...mapState(['categories', 'cart']),
   },
   filters: {
     upFirst(value) {

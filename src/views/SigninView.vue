@@ -4,8 +4,8 @@
       <h1>Hello</h1>
       <p>Sign In or Sign Up to your account</p>
       <b-nav tabs fill>
-        <b-nav-item to="/SignIn" active>Sign In</b-nav-item>
-        <b-nav-item to="/SignUp">Sign Up</b-nav-item>
+        <b-nav-item :to="{ name: 'signin' }" active>Sign In</b-nav-item>
+        <b-nav-item :to="{ name: 'signup' }">Sign Up</b-nav-item>
       </b-nav>
       <b-container class="border border-top-0 bg-white pb-3">
         <b-form @submit.prevent="onSubmit" class="m-3">

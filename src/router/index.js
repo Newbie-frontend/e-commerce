@@ -78,6 +78,12 @@ const router = new Router({
         import(/* webpackChunkName: "about" */ '../views/OrdersView.vue'),
     },
     {
+      path: '/Cart',
+      name: 'cart',
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/CartView.vue'),
+    },
+    {
       path: '/Rates',
       name: 'rates',
       component: () =>
