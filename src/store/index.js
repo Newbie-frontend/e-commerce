@@ -94,10 +94,13 @@ export default new Vuex.Store({
     },
     removeFromCart({ commit, state }, product) {
       const cartItem = state.cart.findIndex((x) => x == product)
-      console.log(cartItem)
       if (cartItem != -1) {
         commit('REMOVE_CART', cartItem)
       }
+    },
+    howManyPro(product) {
+      const count = this.state.cart.filter((item) => item == product).length
+      return count
     },
   },
   modules: {},

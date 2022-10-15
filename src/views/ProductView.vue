@@ -50,6 +50,7 @@
           >
             -
           </BaseButton>
+
           <input
             type="text"
             class="rounded px-2 mx-1"
@@ -57,6 +58,7 @@
             style="width: 3rem; text-align: center"
             readonly
           />
+
           <BaseButton
             buttonClass="-fill-gray"
             @click="addToCart(product)"
@@ -80,19 +82,14 @@ export default {
     shipping() {
       return this.product.price >= 30 ? 0 : 5
     },
-    pros() {
-      let prod = this.cart.filter((item) => item == this.product)
-      console.log(prod)
-      return prod
-    },
     productLength() {
-      const cartLength = this.howManyPro(this.product)
-      return cartLength
+      let product = this.cart.filter((item) => item == this.product).length
+      return product
     },
     ...mapState(['product', 'cart']),
   },
   methods: {
-    ...mapActions(['addToCart', 'removeFromCart', 'howManyPro']),
+    ...mapActions(['addToCart', 'removeFromCart']),
   },
 }
 </script>
