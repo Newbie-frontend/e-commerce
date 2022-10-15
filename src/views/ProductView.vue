@@ -53,7 +53,7 @@
           <input
             type="text"
             class="rounded px-2 mx-1"
-            v-model="cartProductLength"
+            v-model="productLength"
             style="width: 3rem; text-align: center"
             readonly
           />
@@ -76,19 +76,23 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
-  data() {
-    return {
-      cartProductLength: 1,
-    }
-  },
   computed: {
     shipping() {
       return this.product.price >= 30 ? 0 : 5
     },
+    pros() {
+      let prod = this.cart.filter((item) => item == this.product)
+      console.log(prod)
+      return prod
+    },
+    productLength() {
+      const cartLength = this.howManyPro(this.product)
+      return cartLength
+    },
     ...mapState(['product', 'cart']),
   },
   methods: {
-    ...mapActions(['addToCart', 'removeFromCart']),
+    ...mapActions(['addToCart', 'removeFromCart', 'howManyPro']),
   },
 }
 </script>

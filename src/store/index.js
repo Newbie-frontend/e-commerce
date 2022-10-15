@@ -94,7 +94,8 @@ export default new Vuex.Store({
     },
     removeFromCart({ commit, state }, product) {
       const cartItem = state.cart.findIndex((x) => x == product)
-      if (cartItem != undefined) {
+      console.log(cartItem)
+      if (cartItem != -1) {
         commit('REMOVE_CART', cartItem)
       }
     },
